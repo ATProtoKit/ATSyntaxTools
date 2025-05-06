@@ -37,3 +37,7 @@ ATSyntaxTools is fully open source under the [MIT license](https://github.com/AT
 ### Timestamp Identifiers (TIDs)
 
 - <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+
+### Error Handling
+
+- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->

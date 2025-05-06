@@ -20,18 +20,16 @@ public protocol ValidatorProtocol {
 
     /// Normalizes a value into a standard format for reliable parsing and comparison.
     ///
-    /// - Note: This method does not return a value. Implementations typically mutate internal state
-    ///         or rely on computed properties to expose the normalized result.
+    /// - Parameter identifier: The specific identifier to normalize.
     ///
     /// - Throws: An error if normalization fails due to structural issues or invalid content.
-    func normalize() throws
+    func normalize(_ identifier: String) throws
 
     /// Validates the current value against format and specification rules.
     ///
-    /// - Note: This method ensures that the value meets all structural and semantic rules required
-    ///         by the AT Protocol, DID spec, or other context-specific schemas.
+    /// - Parameter identifier: The specific identifier to validate.
     ///
     /// - Throws: An error if validation fails, such as invalid segments, disallowed characters, or
     ///           insufficient structure.
-    func validate() throws
+    func validate(_ identifier: String) throws
 }

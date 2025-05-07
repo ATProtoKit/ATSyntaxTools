@@ -10,9 +10,13 @@ ATSyntaxTools is fully open source under the [MIT license](https://github.com/AT
 
 ## Topics
 
+### Articles
+
+- <doc:ValidatingIdentifiersAndSchemes>
+
 ### AT URIs
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``ATURIValidator``
 
 ### Decentralized Identifiers (DIDs)
 
@@ -20,20 +24,38 @@ ATSyntaxTools is fully open source under the [MIT license](https://github.com/AT
 
 ### Handles
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``HandleValidator``
 
 ### Namespaced Identifiers (NSIDs)
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``NSIDValidator``
 
 ### Record Keys
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``RecordKeyValidator``
 
 ### Timestamp Identifiers (TIDs)
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``TIDValidator``
 
 ### Error Handling
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``InvalidDIDError``
+- ``InvalidHandleError``
+- ``ReservedHandleError``
+- ``UnsupportedDomainError``
+- ``DisallowedDomainError``
+- ``InvalidNSIDError``
+- ``InvalidRecordKeyError``
+- ``InvalidTIDError``
+- ``InvalidATURIError``
+
+### Canonicalizable
+
+- ``Canonicalizable``
+- ``ValidatorProtocol``
+- ``NormalizerProtocol``
+
+### Utilities
+
+- ``RegexMatch``

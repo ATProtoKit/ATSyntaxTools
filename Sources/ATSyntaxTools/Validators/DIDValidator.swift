@@ -8,7 +8,7 @@
 import Foundation
 
 /// Identifies and validates decentralized identifiers (DIDs).
-public enum DIDValidator: ValidatorProtocol {
+public enum DIDValidator: Canonicalizable {
 
     /// Ensures the decentralized identifier (DID) is valid.
     ///

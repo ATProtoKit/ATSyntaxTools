@@ -8,7 +8,7 @@
 import Foundation
 
 /// Identifies and validates handles.
-public enum HandleValidator: ValidatorProtocol {
+public enum HandleValidator: Canonicalizable {
 
     /// A string representation of an invalid handle.
     public static let invalidHandle: String = "handle.invalid"

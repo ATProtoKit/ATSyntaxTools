@@ -74,14 +74,4 @@ public enum NSIDValidator: ValidatorProtocol {
             }
         }
     }
-
-    /// Normalizes the Namespace Identifier (NSID).
-    ///
-    /// - Parameter nsid: The Namespace Identifier (NSID) to be normalized.
-    /// - Returns: A normalized Namespace Identifier (NSID).
-    ///
-    /// - Throws: ``InvalidNSIDError``, indicating the Namespace Identifier (NSID) is invalid.
-    public func normalize(_ nsid: String) throws -> String {
-        <#code#>
-    }
 }

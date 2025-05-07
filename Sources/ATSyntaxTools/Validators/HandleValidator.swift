@@ -57,7 +57,7 @@ public enum HandleValidator: Canonicalizable {
             throw InvalidHandleError.tooLong(maxCharacters: handleCount)
         }
 
-        let handleComponents = handle.split(separator: ".")
+        let handleComponents = handle.components(separatedBy: ".")
         guard handleComponents.count >= 2 else {
             throw InvalidHandleError.handleDomainHasLessThanTwoParts
         }
@@ -118,7 +118,7 @@ public enum HandleValidator: Canonicalizable {
     /// - Parameter handle: The handle that contains the TLD.
     /// - Returns: `true` if the TLD is valid, or `false` if it isn't.
     public func isTLDValid(handle: String) -> Bool {
-        let handleComponents = handle.lowercased().split(separator: ".")
+        let handleComponents = handle.lowercased().components(separatedBy: ".")
 
         guard let handleComponent = handleComponents.last else {
             return false

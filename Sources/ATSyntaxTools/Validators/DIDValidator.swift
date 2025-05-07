@@ -25,7 +25,7 @@ public enum DIDValidator: Canonicalizable {
             throw InvalidDIDError.disallowedCharacter
         }
 
-        let segments = did.split(separator: ":")
+        let segments = did.components(separatedBy: ":")
         guard segments.count >= 3 else {
             throw InvalidDIDError.missingDIDPrefixMethoOrIdentifier
         }

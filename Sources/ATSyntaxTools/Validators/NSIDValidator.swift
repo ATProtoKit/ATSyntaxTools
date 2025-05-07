@@ -30,7 +30,7 @@ public enum NSIDValidator: ValidatorProtocol {
             throw InvalidNSIDError.tooLong(maxCharacters: 317)
         }
 
-        let nsidComponents = nsid.split(separator: ".")
+        let nsidComponents = nsid.components(separatedBy: ".")
         guard nsidComponents.count >= 3 else {
             throw InvalidNSIDError.notEnoughSegments
         }

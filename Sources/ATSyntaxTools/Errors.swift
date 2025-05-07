@@ -170,37 +170,40 @@ public enum DisallowedDomainError: Error, LocalizedError, CustomStringConvertibl
     }
 }
 
-/// Represents errors related to invalid Namespaced Identifiers (NSIDs).
-public enum InvalidNamespacedIdentifierError: Error, LocalizedError, CustomStringConvertible {
+/// Represents errors related to invalid Namespace Identifiers (NSIDs).
+public enum InvalidNSIDError: Error, LocalizedError, CustomStringConvertible {
 
-    /// Namespaced Identifier (NSID) has at least one invalid character.
+    /// Namespace Identifier (NSID) has at least one invalid character.
     case disallowedCharacter
 
-    /// Namespaced Identifier (NSID) is too long.
+    /// Namespace Identifier (NSID) is too long.
     ///
-    /// - Parameter maxCharacters: The maximum number of characters the Namespaced Identifier (NSID)
+    /// - Parameter maxCharacters: The maximum number of characters the Namespace Identifier (NSID)
     /// can have.
     case tooLong(maxCharacters: Int)
 
-    /// At least one part of the Namespaced Identifier (NSID) is empty.
+    /// There are less than three segments in the Namespace Identifier (NSID).
+    case notEnoughSegments
+
+    /// At least one part of the Namespace Identifier (NSID) is empty.
     case nsidPartEmpty
 
-    /// At least one Namespaced Identifier (NSID) part is too long.
+    /// At least one Namespace Identifier (NSID) part is too long.
     ///
-    /// - Parameter maxCharacters: The maximum number of characters the Namespaced Identifier (NSID) part
+    /// - Parameter maxCharacters: The maximum number of characters the Namespace Identifier (NSID) part
     /// can have.
     case nsidPartTooLong(maxCharacters: Int)
 
-    /// At least one Namespaced Identifier (NSID) part starts with, or ends with, a hyphen.
+    /// At least one Namespace Identifier (NSID) part starts with, or ends with, a hyphen.
     case nsidPartStartsOrEndsWithHyphen
 
-    /// At least one Namespaced Identifier (NSID) part starts with a digit.
+    /// At least one Namespace Identifier (NSID) part starts with a digit.
     case nsidPartStartsWithDigit
 
-    /// At least one Namespaced Identifier (NSID) part contains an invalid character.
+    /// At least one Namespace Identifier (NSID) part contains an invalid character.
     case nsidNamePartContainsInvalidCharacter
 
-    /// Namespaced Identifier (NSID) couldn't be validated using a regular expression.
+    /// Namespace Identifier (NSID) couldn't be validated using a regular expression.
     case didntValidateViaRegex
 
     public var errorDescription: String? {
@@ -209,6 +212,8 @@ public enum InvalidNamespacedIdentifierError: Error, LocalizedError, CustomStrin
                 return "NSID has at least one invalid character."
             case .tooLong(let maxCharacters):
                 return "NSID is too long. The maximum number of characters is \(maxCharacters)."
+            case .notEnoughSegments:
+                return "NSID should have at least three segments."
             case .nsidPartEmpty:
                 return "One or more NSID parts are empty."
             case .nsidPartTooLong(let maxCharacters):

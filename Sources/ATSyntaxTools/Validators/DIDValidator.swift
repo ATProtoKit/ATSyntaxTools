@@ -15,7 +15,7 @@ public enum DIDValidator: Canonicalizable {
     /// - Parameter did: The DID to be validated.
     ///
     /// - Throws: ``InvalidDIDError`` , indicating the DID is invalid.
-    public func validate(_ did: String) throws {
+    public static func validate(_ did: String) throws {
         guard did.hasPrefix("did:") else {
             throw InvalidDIDError.noDIDPrefix
         }
@@ -51,10 +51,10 @@ public enum DIDValidator: Canonicalizable {
     /// - Returns: A normalized decentralized identifier (DID).
     ///
     /// - Throws: ``InvalidDIDError``, indicating the DID is invalid.
-    public func normalize(_ did: String) throws -> String {
+    public static func normalize(_ did: String) throws -> String {
         let normalizedDID = did.lowercased()
 
-        try self.validate(normalizedDID)
+        try DIDValidator.validate(normalizedDID)
         return normalizedDID
     }
 }

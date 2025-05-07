@@ -38,7 +38,7 @@ public enum HandleValidator: Canonicalizable {
     /// - Parameter handle: The handle to be validated.
     ///
     /// - Throws: ``InvalidHandleError``, indicating the handle is invalid.
-    public func validate(_ handle: String) throws {
+    public static func validate(_ handle: String) throws {
         guard handle != HandleValidator.invalidHandle else {
             throw InvalidHandleError.handleIsInvalidHandle
         }
@@ -93,9 +93,9 @@ public enum HandleValidator: Canonicalizable {
     /// - Returns: A normalized handle.
     ///
     /// - Throws: ``InvalidHandleError``, indicating the handle is invalid.
-    public func normalize(_ handle: String) throws -> String {
+    public static func normalize(_ handle: String) throws -> String {
         let normalizedHandle = handle.lowercased()
-        try self.validate(normalizedHandle)
+        try HandleValidator.validate(normalizedHandle)
 
         return normalizedHandle
     }
@@ -106,7 +106,7 @@ public enum HandleValidator: Canonicalizable {
     /// - Returns: `true` if the handle is valid, or `false` if it isn't.
     public func isHandleValid(_ handle: String) -> Bool {
         do {
-            try self.validate(handle.lowercased())
+            try HandleValidator.validate(handle.lowercased())
             return true
         } catch {
             return false

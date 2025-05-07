@@ -20,7 +20,7 @@ public protocol ValidatorProtocol {
     ///
     /// - Throws: An error if validation fails, such as invalid segments, disallowed characters, or
     ///           insufficient structure.
-    func validate(_ identifier: String) throws
+    static func validate(_ identifier: String) throws
 }
 
 /// A protocol for types that normalize raw identifier input into a standardized, canonical form.
@@ -35,7 +35,7 @@ public protocol NormalizerProtocol {
     /// - Returns: The normalized identifier.
     ///
     /// - Throws: An error if normalization fails due to structural issues or invalid content.
-    func normalize(_ identifier: String) throws -> Identifier
+    static func normalize(_ identifier: String) throws -> Identifier
 }
 
 /// A protocol that defines the interface for normalizing and validating raw identifiers.

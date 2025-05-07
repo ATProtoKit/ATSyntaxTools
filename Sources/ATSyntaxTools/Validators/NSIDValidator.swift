@@ -15,7 +15,7 @@ public enum NSIDValidator: ValidatorProtocol {
     /// - Parameter nsid: The Namespace Identifier (NSID) to be validated.
     ///
     /// - Throws: ``InvalidNSIDError`` , indicating the Namespace Identifier (NSID) is invalid.
-    public func validate(_ nsid: String) throws {
+    public static func validate(_ nsid: String) throws {
         let asciiCheck = CharacterSet.decimalDigits
             .union(.uppercaseLetters)
             .union(.lowercaseLetters)

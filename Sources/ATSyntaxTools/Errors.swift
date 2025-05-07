@@ -266,19 +266,15 @@ public enum InvalidRecordKeyError: Error, LocalizedError, CustomStringConvertibl
 public enum InvalidTIDError: Error, LocalizedError, CustomStringConvertible {
 
     /// Timestamp Identifier (TID) is not at the valid length.
-    ///
-    /// - Parameters:
-    ///   - minimum: The minimum number of characters the Timestamp Identifier can have.
-    ///   - maximum: The maximum number of characters the Timestamp Identifier can have.
-    case invalidLength(minimum: Int, maximum: Int)
+    case invalidLength
 
     /// Timestamp Identifier (TID) contains invalid syntax.
     case invalidSyntax
 
     public var errorDescription: String? {
         switch self {
-            case .invalidLength(let minimum, let maximum):
-                return "Invalid TID length. Must be between \(minimum) to \(maximum)."
+            case .invalidLength:
+                return "Invalid TID length. Must be 13 characters long."
             case .invalidSyntax:
                 return "Invalid TID syntax."
         }

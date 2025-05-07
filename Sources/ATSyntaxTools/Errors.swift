@@ -307,8 +307,8 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
     /// The handle or DID of the authority part of the AT URI are invalid.
     case invalidHandleOrDIDInAuthorityPart
 
-    /// AT URI contains a slash while it lacks a path segment.
-    case containsSlashWithoutPathSegment
+    /// AT URI contains a slash after the authority segment while it lacks a path segment.
+    case containsSlashAfterAuthoritySegmentWithoutPathSegment
 
     /// The Namespaced Identifier (NSID) in the path segment is invalid.
     case invalidNSIDInFirstPathSegment
@@ -319,17 +319,20 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
     /// AT URI contains an invalid number of parts with a trailing slash.
     case invalidNumberOfPartsWithTrailingSlash
 
-    /// AT URI's fragment part is empty, with no slash character at the start.
-    case emptyFragmentPartWithNoSlashAtTheStart
+    /// AT URI's fragment part is empty, with a slash character at the start.
+    case emptyFragmentPartWithSlashAtTheStart
 
     /// AT URI has too many characters.
     case tooLong
 
+    /// AT URI has more than two path segments and/or has a trailing slash.
+    case tooManyPathSegmentsAndOrHasTrailingSlash
+
+    /// There is at least one invalid character in the fragment segment.
+    case disallowedCharactersInFragmentSegment
+
     /// AT URI couldn't be validated using a regular expression.
     case didntValidateViaRegex
-
-    /// The Namespaced Identifier (NSID) in the segment part is invalid.
-    case invalidNSIDInSegmentPart
 
     public var errorDescription: String? {
         switch self {
@@ -343,22 +346,24 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
                 return "Method and/or authority parts of the AT URI are empty."
             case .invalidHandleOrDIDInAuthorityPart:
                 return "The handle or DID of the authority part of the AT URI are invalid."
-            case .containsSlashWithoutPathSegment:
-                return "AT URI contains a slash `/` while it lacks a path segment."
+            case .containsSlashAfterAuthoritySegmentWithoutPathSegment:
+                return "AT URI contains a slash `/` after the authority segment, while it lacks a path segment."
             case .invalidNSIDInFirstPathSegment:
                 return "The NSID in the first path segment of the AT URI is invalid."
             case .containsSlashAfterCollectionWithNoRecordKey:
                 return "AT URI contains a slash `/` after a collection segment while lacking a Record Key."
             case .invalidNumberOfPartsWithTrailingSlash:
                 return "AT URI has an invalid number of parts with a trailing slash."
-            case .emptyFragmentPartWithNoSlashAtTheStart:
-                return "AT URI's fragment part is empty, with no slash character at the start."
+            case .emptyFragmentPartWithSlashAtTheStart:
+                return "AT URI's fragment part is empty, with a slash character at the start."
             case .tooLong:
                 return "AT URI has too many characters."
+            case .tooManyPathSegmentsAndOrHasTrailingSlash:
+                return "AT URI has too many path segments and/or a trailing slash."
+            case .disallowedCharactersInFragmentSegment:
+                return "Invalid character in the fragment segment of the AT URI."
             case .didntValidateViaRegex:
                 return "The string didn't validate via regular expression."
-            case .invalidNSIDInSegmentPart:
-                return "The NSID in a path segment of the AT URI is invalid."
         }
     }
 

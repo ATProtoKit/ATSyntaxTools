@@ -58,6 +58,9 @@ public enum InvalidDIDError: Error, LocalizedError, CustomStringConvertible {
 /// Represents errors related to invalid handles.
 public enum InvalidHandleError: Error, LocalizedError, CustomStringConvertible {
 
+    /// Handle is literally named `invalid.handle`.
+    case handleIsInvalidHandle
+
     /// Handle has at least one invalid character.
     case disallowedCharacter
 
@@ -69,7 +72,7 @@ public enum InvalidHandleError: Error, LocalizedError, CustomStringConvertible {
     /// Handle domain has less than two parts.
     case handleDomainHasLessThanTwoParts
 
-    ///Handle parts don't contain any characters.
+    /// Handle parts don't contain any characters.
     case handlePartsEmpty
 
     /// At least one part of the handle is too long.
@@ -78,12 +81,17 @@ public enum InvalidHandleError: Error, LocalizedError, CustomStringConvertible {
     /// At least one part of the handle begins with, or ends with, a hyphen.
     case handlePartStartsOrEndsWithHyphen
 
+    /// The TLD portion of the handle contains a non-ASCII letter.
+    case tldPartBeginsWithNonASCIILetter
+
     /// Handle couldn't be validated using a regular expression.
     case didntValidateViaRegex
 
 
     public var errorDescription: String? {
         switch self {
+            case .handleIsInvalidHandle:
+                return "Handle is literally named \"invalid.handle\"."
             case .disallowedCharacter:
                 return "Handle has at least one invalid character."
             case .tooLong(let maxCharacters):
@@ -96,6 +104,8 @@ public enum InvalidHandleError: Error, LocalizedError, CustomStringConvertible {
                 return "At least one part of the handle is too long."
             case .handlePartStartsOrEndsWithHyphen:
                 return "At least one part of the handle begins with, or ends with, a hyphen."
+            case .tldPartBeginsWithNonASCIILetter:
+                return "The TLD portion of the handle must begin with an ASCII letter."
             case .didntValidateViaRegex:
                 return "Handle didn't validate via regular expression."
         }

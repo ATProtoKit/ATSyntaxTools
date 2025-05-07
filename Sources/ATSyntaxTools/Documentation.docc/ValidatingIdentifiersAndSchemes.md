@@ -61,11 +61,6 @@ This scheme also needs to conform to the following requirements:
 
 Further reading: [AT URI Syntax](https://atproto.com/specs/at-uri-scheme)
 
-
-### Content Identifier (CID)
-
-Further reading: [IPFS Docs: Content Identifiers](https://docs.ipfs.tech/concepts/content-addressing/#identifier-formats)
-
 ### Decentralized Identifier (DID)
 
 Decentralized Identifiers (DIDs) have two sets of requirements: the ones defined by the [W3C](https://www.w3.org/TR/did-core/#did-syntax) and the ones defined in the AT Protocol.
@@ -86,13 +81,13 @@ For the W3C:
 - Queries ("?") and fragments ("#") are defined for "DID URIs", but are not part of the identifier itself.
 - The current specification does not impose a maximum length for a DID.
 
-- Note: ``DIDManager`` can normalize the the DID to ensure the first segment is lowercased.
+- Note: ``DIDValidator`` can normalize the the DID to ensure the first segment is lowercased.
 
 In addition, the AT Protocol makes the following requirements:
 - `did:plc` and `did:web` are currently the only two types that are valid. This is not enforced at the lexicon layer.
 - A hard limit of 8 KB is put in place.
 
-- Note: ``DIDManager`` can't validate percent encoding at this time.
+- Note: ``DIDValidator`` can't validate percent encoding at this time.
 
 Further reading: [DID Syntax](https://atproto.com/specs/did)
 
@@ -113,7 +108,7 @@ Handles in the AT Protocol must conform to the following rules to be valid:
 - Each segment is separated by ASCII periods and can't start or end with a period.
 - Handles are case-insensitive, so it doesn't matter whether the letter is capitalized or not.
 
-``HandleManager`` can check if you're using an invalid TLD by using ``HandleManager/isValidTLD(handle:)``.
+``HandleValidator`` can check if you're using an invalid TLD by using ``HandleValidator/isHandleValid(_:).
 
 - Important: ATProtoKit won't be able to check for punycode domains at this time.
 
@@ -144,7 +139,7 @@ Namespaced Identifiers (NSIDs) have specific requirements: rules for the overall
 - Can be in ASCII letters (both uppercase and lowercase).
 - The name _is_ case-sensitive. Do not normalize them.
 
-- Note: ``NSIDManager`` can help to automatically normalize the domain authority segments while leaving the name segment alone.
+- Note: ``NSIDValidator`` can help to automatically normalize the domain authority segments while leaving the name segment alone.
 
 Further reading: [NSID Syntax](https://atproto.com/specs/nsid)
 

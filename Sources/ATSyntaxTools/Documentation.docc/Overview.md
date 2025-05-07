@@ -14,13 +14,9 @@ ATSyntaxTools is fully open source under the [MIT license](https://github.com/AT
 
 - <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
 
-### Content Identifiers (CIDs)
-
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
-
 ### Decentralized Identifiers (DIDs)
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``DIDValidator``
 
 ### Handles
 

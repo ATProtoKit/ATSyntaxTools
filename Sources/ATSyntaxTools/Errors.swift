@@ -17,7 +17,7 @@ public enum InvalidDIDError: Error, LocalizedError, CustomStringConvertible {
     case disallowedCharacter
 
     /// Decentralized identifier (DID) is missing the `did:` prefix, method, or identifier.
-    case missingDIDPrefixMethodAndIdentifier
+    case missingDIDPrefixMethoOrIdentifier
 
     /// Decentralized identifier (DID) has an uppercase character.
     case didContainsUppercaseLetter
@@ -37,7 +37,7 @@ public enum InvalidDIDError: Error, LocalizedError, CustomStringConvertible {
                 return "DID must start with 'did:'."
             case .disallowedCharacter:
                 return "Invalid character in DID. DID should only include ASCII characters, numbers, '-', '_', '.', '+', and '/'."
-            case .missingDIDPrefixMethodAndIdentifier:
+            case .missingDIDPrefixMethoOrIdentifier:
                 return "DID must start with 'did:' followed by a method and method specific content."
             case .didContainsUppercaseLetter:
                 return "DID method must consist of lowercase letters."

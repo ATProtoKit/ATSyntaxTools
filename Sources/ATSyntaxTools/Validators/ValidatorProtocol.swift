@@ -47,4 +47,4 @@ public protocol NormalizerProtocol {
 /// These functions are essential in the AT Protocol to enforce compliance with expected formats like
 /// decentralized identifiers (DIDs) or AT URIs. They throw specific errors to explain why a given input
 /// is invalid.
-typealias Canonicalizable = ValidatorProtocol & NormalizerProtocol
+public typealias Canonicalizable = ValidatorProtocol & NormalizerProtocol

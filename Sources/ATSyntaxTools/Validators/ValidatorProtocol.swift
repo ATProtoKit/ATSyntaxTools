@@ -18,12 +18,16 @@ import Foundation
 /// is invalid.
 public protocol ValidatorProtocol {
 
-    /// Normalizes a value into a standard format for reliable parsing and comparison.
+    /// An associated type that identifies a specific identifier.
+    associatedtype Identifier = String
+
+    /// Normalizes a value into a more standard format.
     ///
     /// - Parameter identifier: The specific identifier to normalize.
+    /// - Returns: The normalized identifier.
     ///
     /// - Throws: An error if normalization fails due to structural issues or invalid content.
-    func normalize(_ identifier: String) throws
+    func normalize(_ identifier: String) throws -> Identifier
 
     /// Validates the current value against format and specification rules.
     ///

@@ -57,4 +57,17 @@ public enum DIDValidator: Canonicalizable {
         try DIDValidator.validate(normalizedDID)
         return normalizedDID
     }
+
+    /// Determines whether the decentralized identifier (DID) is valid.
+    ///
+    /// - Parameter did: The decentralized identifier (DID) to validate.
+    /// - Returns: `true` if the decentralized identifier (DID) is valid, or `false` if it isn't.
+    public static func isValid(_ did: String) -> Bool {
+        do {
+            try DIDValidator.validate(did)
+            return true
+        } catch {
+            return false
+        }
+    }
 }

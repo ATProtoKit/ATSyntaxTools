@@ -104,7 +104,7 @@ public enum HandleValidator: Canonicalizable {
     ///
     /// - Parameter handle: The handle to validate.
     /// - Returns: `true` if the handle is valid, or `false` if it isn't.
-    public static func isHandleValid(_ handle: String) -> Bool {
+    public static func isValid(_ handle: String) -> Bool {
         do {
             try HandleValidator.validate(handle.lowercased())
             return true
@@ -127,5 +127,4 @@ public enum HandleValidator: Canonicalizable {
         let tld = ".\(handleComponent)"
         return HandleValidator.disallowedTLDs.contains(tld)
     }
-
 }

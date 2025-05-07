@@ -21,6 +21,12 @@ public protocol ValidatorProtocol {
     /// - Throws: An error if validation fails, such as invalid segments, disallowed characters, or
     ///           insufficient structure.
     static func validate(_ identifier: String) throws
+
+    /// Determines if the identifier is valid.
+    ///
+    /// - Parameter identifier: The specific identifier to validate.
+    /// - Returns: `true` if the identifier is valid, or `false` if it isn't.
+    static func isValid(_ identifier: String) -> Bool
 }
 
 /// A protocol for types that normalize raw identifier input into a standardized, canonical form.

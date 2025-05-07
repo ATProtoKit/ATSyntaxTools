@@ -74,4 +74,17 @@ public enum NSIDValidator: ValidatorProtocol {
             }
         }
     }
+
+    /// Determines whether the Namespaced Identifier (NSID) is valid.
+    ///
+    /// - Parameter nsid: The Namespaced Identifier (NSID) to validate.
+    /// - Returns: `true` if the Namespaced Identifier (NSID) is valid, or `false` if it isn't.
+    public static func isValid(_ nsid: String) -> Bool {
+        do {
+            try NSIDValidator.validate(nsid)
+            return true
+        } catch {
+            return false
+        }
+    }
 }

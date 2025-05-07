@@ -33,4 +33,17 @@ public enum RecordKeyValidator: ValidatorProtocol {
             throw InvalidRecordKeyError.onlyContainsPeriods
         }
     }
+
+    /// Determines whether the Record Key is valid.
+    ///
+    /// - Parameter recordKey: The Record Key to validate.
+    /// - Returns: `true` if the Record Key is valid, or `false` if it isn't.
+    public static func isValid(_ recordKey: String) -> Bool {
+        do {
+            try RecordKeyValidator.validate(recordKey)
+            return true
+        } catch {
+            return false
+        }
+    }
 }

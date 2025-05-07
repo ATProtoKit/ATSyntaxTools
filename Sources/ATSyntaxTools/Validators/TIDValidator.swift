@@ -31,6 +31,18 @@ public enum TIDValidator: ValidatorProtocol {
                 throw InvalidTIDError.invalidSyntax
             }
         }
+    }
 
+    /// Determines whether the Timestamp Identifier (TID) is valid.
+    ///
+    /// - Parameter tid: The Timestamp Identifier (TID) to validate.
+    /// - Returns: `true` if the Timestamp Identifier (TID) is valid, or `false` if it isn't.
+    public static func isValid(_ tid: String) -> Bool {
+        do {
+            try TIDValidator.validate(tid)
+            return true
+        } catch {
+            return false
+        }
     }
 }

@@ -100,4 +100,17 @@ public enum ATURIValidator: ValidatorProtocol {
             throw InvalidATURIError.tooLong
         }
     }
+
+    /// Determines whether the AT URI is valid.
+    ///
+    /// - Parameter atURI: The AT URI to validate.
+    /// - Returns: `true` if the handle is valid, or `false` if it isn't.
+    public static func isValid(_ atURI: String) -> Bool {
+        do {
+            try ATURIValidator.validate(atURI)
+            return true
+        } catch {
+            return false
+        }
+    }
 }

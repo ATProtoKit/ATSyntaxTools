@@ -104,7 +104,7 @@ public enum HandleValidator: Canonicalizable {
     ///
     /// - Parameter handle: The handle to validate.
     /// - Returns: `true` if the handle is valid, or `false` if it isn't.
-    public func isHandleValid(_ handle: String) -> Bool {
+    public static func isHandleValid(_ handle: String) -> Bool {
         do {
             try HandleValidator.validate(handle.lowercased())
             return true
@@ -117,7 +117,7 @@ public enum HandleValidator: Canonicalizable {
     ///
     /// - Parameter handle: The handle that contains the TLD.
     /// - Returns: `true` if the TLD is valid, or `false` if it isn't.
-    public func isTLDValid(handle: String) -> Bool {
+    public static func isTLDValid(handle: String) -> Bool {
         let handleComponents = handle.lowercased().components(separatedBy: ".")
 
         guard let handleComponent = handleComponents.last else {

@@ -45,19 +45,6 @@ public enum DIDValidator: Canonicalizable {
         }
     }
 
-    /// Normalizes the decentralized identifier (DID).
-    ///
-    /// - Parameter did: The decentralized identifier (DID) to be normalized.
-    /// - Returns: A normalized decentralized identifier (DID).
-    ///
-    /// - Throws: ``InvalidDIDError``, indicating the DID is invalid.
-    public static func normalize(_ did: String) throws -> String {
-        let normalizedDID = did.lowercased()
-
-        try DIDValidator.validate(normalizedDID)
-        return normalizedDID
-    }
-
     /// Determines whether the decentralized identifier (DID) is valid.
     ///
     /// - Parameter did: The decentralized identifier (DID) to validate.
@@ -69,5 +56,18 @@ public enum DIDValidator: Canonicalizable {
         } catch {
             return false
         }
+    }
+
+    /// Normalizes the decentralized identifier (DID).
+    ///
+    /// - Parameter did: The decentralized identifier (DID) to be normalized.
+    /// - Returns: A normalized decentralized identifier (DID).
+    ///
+    /// - Throws: ``InvalidDIDError``, indicating the DID is invalid.
+    public static func normalize(_ did: String) throws -> String {
+        let normalizedDID = did.lowercased()
+
+        try DIDValidator.validate(normalizedDID)
+        return normalizedDID
     }
 }

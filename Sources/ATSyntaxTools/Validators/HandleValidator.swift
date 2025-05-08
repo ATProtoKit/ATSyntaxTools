@@ -87,19 +87,6 @@ public enum HandleValidator: Canonicalizable {
         }
     }
 
-    /// Normalizes the handle.
-    ///
-    /// - Parameter handle: The handle to be normalized.
-    /// - Returns: A normalized handle.
-    ///
-    /// - Throws: ``InvalidHandleError``, indicating the handle is invalid.
-    public static func normalize(_ handle: String) throws -> String {
-        let normalizedHandle = handle.lowercased()
-        try HandleValidator.validate(normalizedHandle)
-
-        return normalizedHandle
-    }
-
     /// Determines whether the handle is valid.
     ///
     /// - Parameter handle: The handle to validate.
@@ -126,5 +113,18 @@ public enum HandleValidator: Canonicalizable {
 
         let tld = ".\(handleComponent)"
         return HandleValidator.disallowedTLDs.contains(tld)
+    }
+
+    /// Normalizes the handle.
+    ///
+    /// - Parameter handle: The handle to be normalized.
+    /// - Returns: A normalized handle.
+    ///
+    /// - Throws: ``InvalidHandleError``, indicating the handle is invalid.
+    public static func normalize(_ handle: String) throws -> String {
+        let normalizedHandle = handle.lowercased()
+        try HandleValidator.validate(normalizedHandle)
+
+        return normalizedHandle
     }
 }

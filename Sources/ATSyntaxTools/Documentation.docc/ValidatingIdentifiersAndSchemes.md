@@ -16,10 +16,10 @@ Regardless of the manager struct you're using, you'll be able to find a `validat
 
 ```swift
 do {
-try HandleManager.validate(bsky.social)
-// If no errors are made, then the handle is valid.
+    try HandleValidator.validate("bsky.social")
+    // If no errors are made, then the handle is valid.
 } catch {
-return error
+    print(error)
 }
 ```
 
@@ -28,9 +28,12 @@ return error
 Some of the identity managers include a `normalize(_:)` method. This will check to see if the identifiers have proper formats for use in the AT Protocol. This method will typically validate that the identifier is valid. Once that's passed, it will then format the identifier so that it's able to be used in the AT Protocol.
 
 ```swift
-let normalizedHandle = HandleManager.normalize(ATProto.com)
-
-print(normalizedHandle) // Prints as "atproto.com".
+do {
+    let normalizedHandle = try HandleValidator.normalize("ATProto.com")
+    print(normalizedHandle) // Prints as "atproto.com".
+} catch {
+    print(error)
+}
 ```
 
 - Important: Normalization should only be used if you're writing them out manually or if you're getting the identifier through a means other than directly from an API through the AT Protocol.

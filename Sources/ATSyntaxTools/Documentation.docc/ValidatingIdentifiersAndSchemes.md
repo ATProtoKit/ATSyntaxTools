@@ -67,12 +67,12 @@ Decentralized Identifiers (DIDs) have two sets of requirements: the ones defined
 
 For the W3C:
 - The entire URI must be ASCII. This includes:
-- Letters and digits (both uppercase and lowercase).
-- Periods (.).
-- Underscores (\_).
-- Colons (:).
-- Percentage signs (%).
-- Hypens (-).
+    - Letters and digits (both uppercase and lowercase).
+    - Periods (.).
+    - Underscores (\_).
+    - Colons (:).
+    - Percentage signs (%).
+    - Hypens (-).
 - The first segment must be `did:`. It must all be lowercased.
 - The second segment (the method) should have at least one lowercased letter, followed by a colon (:).
 - The final segment can be of any allowed characters, except for the colon (:).

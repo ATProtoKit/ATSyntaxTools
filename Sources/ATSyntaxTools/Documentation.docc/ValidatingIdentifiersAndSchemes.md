@@ -98,9 +98,9 @@ Handles in the AT Protocol must conform to the following rules to be valid:
 - The handle should be a valid domain name as per the RFC standards (e.g.: RFC-3696 (Section 2), RFC-3986 (Section 3)).
 - Each segment of a handle can only include letters and digits from the ASCII standard, as well as hypens (-).
 - They can't begin or end with a hypen.
-- The last segment (the TLD; e.g.: .com, .net, .social, etc.) shouldn't start with a digit.
-- The TLD (last component) must not start with a digit.
-- Must not contain whitespace, null bytes, or joining characters.
+- The last segment (the Top-Level Domain, or "TLD" for short; e.g.: .com, .net, .social, etc.) shouldn't start with a digit.
+- The TLD must not start with a digit.
+- Must not contain whitespace, `nil` bytes, or joining characters.
 - Punycode is allowed for internationalized domain names.
 - The length requirements include:
 - Between 1 to 63 characters for each segment (excluding periods).
@@ -108,7 +108,7 @@ Handles in the AT Protocol must conform to the following rules to be valid:
 - Each segment is separated by ASCII periods and can't start or end with a period.
 - Handles are case-insensitive, so it doesn't matter whether the letter is capitalized or not.
 
-``HandleValidator`` can check if you're using an invalid TLD by using ``HandleValidator/isHandleValid(_:).
+``HandleValidator`` can check if you're using an invalid TLD by using ``HandleValidator/isTLDValid(handle:)``.
 
 - Important: ATProtoKit won't be able to check for punycode domains at this time.
 

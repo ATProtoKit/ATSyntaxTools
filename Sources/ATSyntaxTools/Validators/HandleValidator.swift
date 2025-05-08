@@ -113,7 +113,7 @@ public enum HandleValidator: Canonicalizable {
         }
     }
 
-    /// Determines whether the TLD is valid.
+    /// Determines whether the Top-Level Domain (TLD) is valid.
     ///
     /// - Parameter handle: The handle that contains the TLD.
     /// - Returns: `true` if the TLD is valid, or `false` if it isn't.

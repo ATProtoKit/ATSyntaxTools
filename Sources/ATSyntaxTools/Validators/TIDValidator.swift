@@ -8,6 +8,9 @@
 import Foundation
 
 /// Identifies and validates Timestamp Identifiers (TIDs).
+///
+/// - Note: This is not to be confused with a Top-Level Domain (TLD). To validate that, use
+/// ``HandleValidator/isTLDValid(handle:)`` and pass in the handle.
 public enum TIDValidator: ValidatorProtocol {
 
     /// Ensures the Timestamp Identifier (TID) is valid.

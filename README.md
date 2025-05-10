@@ -20,6 +20,8 @@
 
 ATSyntaxTools is a lightweight Swift library for handling validations for various identifiers within the AT Protocol. It's fast, simple, and leaves an extremely small footprint in your project. This package is designed to ensure that you're not passing the wrong infroamtion that could cause your project to crash.
 
+This Swift package mainly focuses on the syntax validation side of the AT Protocol. This is based on the [`syntax`](https://github.com/bluesky-social/atproto/tree/main/packages/syntax) package from the official [`atproto`](https://github.com/bluesky-social/atproto) TypeScript repository.
+
 ## Quick Examples
 
 Here are the following identifiers for you to use in this package.

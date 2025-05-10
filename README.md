@@ -4,7 +4,7 @@
 
 <h1 align="center">ATSyntaxTools</h1>
 
-<p align="center">Syntax checking utilities for the AT Protocol, written in Swift.</p>
+<p align="center">Syntax validators for the AT Protocol, written in Swift.</p>
 
 <div align="center">
 

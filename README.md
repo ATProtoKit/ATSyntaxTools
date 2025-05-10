@@ -108,7 +108,7 @@ targets: [
 ```
 
 ## Requirements
-To use ATProtoKit in your apps, your app should target the specific version numbers:
+To use ATSyntaxTools in your apps, your app should target the specific version numbers:
 - **iOS** and **iPadOS** 14 or later.
 - **macOS** 13 or later.
 - **tvOS** 14 or later.

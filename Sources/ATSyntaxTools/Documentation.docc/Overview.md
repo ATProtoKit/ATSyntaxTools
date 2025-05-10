@@ -14,7 +14,7 @@ Validate various AT Protocol-specific identifiers.
 
 ATSyntaxTools is a Swift package used for validating the various identifiers within the AT Protocol. This is useful for type-checking whether something is valid before sending it off to a server.
 
-## Quick Example
+## Quick Examples
 
 ### Handles
 

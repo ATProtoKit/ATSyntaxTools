@@ -79,7 +79,7 @@ do {
 
 This is a lightweight, simple package that can be used for both the ATProtoKit family of Swift packages, as well as any AT Protocol packages unrelated to ATProtoKit. Not only is validation within the scope of best practices with respect to Swift, but it'll help to reduce less potenital bugs and errors.
 
-ATSyntaxTools is fully open source under the [MIT license](https://github.com/ATProtoKit/ATSyntaxTools/blob/main/LICENSE.md). You can take a look at it and make contributions to it [on GitHub](https://github.com/ATProtoKit/ATSyntaxTools).
+ATSyntaxTools is fully open source under the [Apache 2.0 license](https://github.com/ATProtoKit/ATSyntaxTools/blob/main/LICENSE.md). You can take a look at it and make contributions to it [on GitHub](https://github.com/ATProtoKit/ATSyntaxTools).
 
 ## Topics
 

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/ATProtoKit/ATSyntaxTools/blob/main/Sources/ATSyntaxTools/Documentation.docc/Resources/atsyntaxtools_icon.png" height="128" alt="An icon for ATSyntaxTools, which contains three stacks of rounded rectangles in an isometric top view. At the top stack, there's an at symbol in a thich weight, with a pointed arrow at the tip. On the left and right side, there are left and right curly braces in a thick weight. Behind the at symbol is a faded slash. The three stacks are, from top to bottom, green, teal, and blue.">
+  <img src="https://github.com/ATProtoKit/ATSyntaxTools/blob/main/Sources/ATSyntaxTools/Documentation.docc/Resources/atsyntaxtools_icon.png" height="128" alt="An icon for ATSyntaxTools, which contains three stacks of rounded rectangles in an isometric top view. At the top stack, there's an at symbol in a thick weight, with a pointed arrow at the tip. On the left and right side, there are left and right curly braces in a thick weight. Behind the at symbol is a faded slash. The three stacks are, from top to bottom, green, teal, and blue.">
 </p>
 
 <h1 align="center">ATSyntaxTools</h1>

@@ -8,8 +8,9 @@
 
 <div align="center">
 
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FATProtoKit%2FATSyntaxTools%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/ATProtoKit/ATSyntaxTools)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FATProtoKit%2FATSyntaxTools%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/ATProtoKit/ATSyntaxTools)
 [![GitHub Repo stars](https://img.shields.io/github/stars/ATProtoKit/ATSyntaxTools?style=flat&logo=github)](https://github.com/ATProtoKit/ATSyntaxTools)
-
 
 </div>
 <div align="center">

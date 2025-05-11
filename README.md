@@ -8,7 +8,8 @@
 
 <div align="center">
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/atprotokit/atsyntaxtools?style=flat&logo=github)](https://github.com/ATProtoKit/ATSyntaxTools)
+[![GitHub Repo stars](https://img.shields.io/github/stars/ATProtoKit/ATSyntaxTools?style=flat&logo=github)](https://github.com/ATProtoKit/ATSyntaxTools)
+
 
 </div>
 <div align="center">

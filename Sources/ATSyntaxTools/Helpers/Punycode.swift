@@ -35,6 +35,43 @@ public enum Punycode {
     /// Delimiter used in Punycode to separate basic and encoded code points.
     private static let labelDelimiter: Character = "-"
 
+    /// Encodes a full domain name (e.g. `bücher.com` or `🍿.com`) using IDNA rules.
+    ///
+    /// This function splits the domain into labels, encodes each with Punycode if needed,
+    /// and prepends "xn--" to any encoded label as per IDNA.
+    ///
+    /// - Parameter domain: A full domain name (may include Unicode).
+    /// - Returns: The encoded domain (e.g. "xn--bcher-kva.com")
+    public static func encodeDomain(_ domain: String) throws -> String {
+        return try domain
+            .split(separator: ".")
+            .map { label in
+                if label.allSatisfy(\.isASCII) {
+                    return String(label)
+                } else {
+                    let encoded = try Punycode.encode(String(label))
+                    return "xn--" + encoded
+                }
+            }.joined(separator: ".")
+    }
+
+    /// Decodes a full Punycode-based domain back to its Unicode representation.
+    ///
+    /// - Parameter domain: A domain name with potential "xn--" labels.
+    /// - Returns: A Unicode-decoded domain name.
+    public static func decodeDomain(_ domain: String) throws -> String {
+        return try domain
+            .split(separator: ".")
+            .map { label in
+                if label.hasPrefix("xn--") {
+                    let punycode = String(label.dropFirst(4))
+                    return try Punycode.decode(punycode)
+                } else {
+                    return String(label)
+                }
+            }.joined(separator: ".")
+    }
+
     /// Decodes a Punycode string into a Unicode string.
     ///
     /// - Parameter punycode: The Punycode-encoded string (must be ASCII only).

@@ -122,6 +122,7 @@ ATSyntaxTools is fully open source under the [Apache 2.0 license](https://github
 - ``InvalidRecordKeyError``
 - ``InvalidTIDError``
 - ``InvalidATURIError``
+- ``PunycodeError``
 
 ### Canonicalizable
 
@@ -132,3 +133,4 @@ ATSyntaxTools is fully open source under the [Apache 2.0 license](https://github
 ### Utilities
 
 - ``RegexMatch``
+- ``Punycode``

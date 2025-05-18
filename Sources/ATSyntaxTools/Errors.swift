@@ -367,3 +367,48 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
         return errorDescription ?? String(describing: self)
     }
 }
+
+/// Errors that can occur during Punycode encoding/decoding.
+public enum PunycodeError: Error, CustomStringConvertible {
+
+    /// Input contains non-ASCII characters.
+    case nonASCIIInput
+
+    /// Encountered an invalid digit in the punycode string.
+    ///
+    /// - Parameter character: The invalid character value.
+    case invalidDigit(invalidCharacter: Character)
+
+    /// Arithmetic overflow detected.
+    case overflow
+
+    /// An invalid Unicode scalar was found.
+    ///
+    /// - Parameter scalar: An integer value that represents a scalar.
+    case invalidUnicodeScalar(scalar: UInt32)
+
+    /// The input is empty.
+    case emptyInput
+
+    /// No Unicode scalar for a character.
+    ///
+    /// - Parameter scalar: The invalid scalar value.
+    case missingUnicodeScalar(scalar: Character)
+
+    public var description: String {
+        switch self {
+            case .nonASCIIInput:
+                return "Input contains non-ASCII characters."
+            case .invalidDigit(let character):
+                return "Invalid digit '\(character)' encountered in Punycode string."
+            case .overflow:
+                return "Arithmetic overflow during encoding/decoding."
+            case .invalidUnicodeScalar(let codepoint):
+                return "Invalid Unicode scalar value: \(codepoint)."
+            case .emptyInput:
+                return "No encodable data."
+            case .missingUnicodeScalar(let character):
+                return "Character '\(character)' does not have a unicode scalar."
+        }
+    }
+}

@@ -66,8 +66,9 @@ public enum DIDValidator: Canonicalizable {
     /// - Throws: ``InvalidDIDError``, indicating the DID is invalid.
     public static func normalize(_ did: String) throws -> String {
         let normalizedDID = did.lowercased()
+        let asciiDID = try Punycode.encode(normalizedDID)
+        try DIDValidator.validate(asciiDID)
 
-        try DIDValidator.validate(normalizedDID)
         return normalizedDID
     }
 }

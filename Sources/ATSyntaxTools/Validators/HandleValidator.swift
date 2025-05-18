@@ -123,8 +123,9 @@ public enum HandleValidator: Canonicalizable {
     /// - Throws: ``InvalidHandleError``, indicating the handle is invalid.
     public static func normalize(_ handle: String) throws -> String {
         let normalizedHandle = handle.lowercased()
-        try HandleValidator.validate(normalizedHandle)
+        let asciiHandle = try Punycode.encode(normalizedHandle)
+        try HandleValidator.validate(asciiHandle)
 
-        return normalizedHandle
+        return asciiHandle
     }
 }

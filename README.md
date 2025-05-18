@@ -112,7 +112,7 @@ targets: [
 ## Requirements
 To use ATSyntaxTools in your apps, your app should target the specific version numbers:
 - **iOS** and **iPadOS** 14 or later.
-- **macOS** 12 or later.
+- **macOS** 13 or later.
 - **tvOS** 14 or later.
 - **visionOS** 1 or later.
 - **watchOS** 9 or later.

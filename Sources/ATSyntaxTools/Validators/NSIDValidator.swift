@@ -14,19 +14,19 @@ public enum NSIDValidator: ValidatorProtocol {
     ///
     /// - Parameter nsid: The Namespace Identifier (NSID) to be validated.
     ///
-    /// - Throws: ``InvalidNSIDError`` , indicating the Namespace Identifier (NSID) is invalid.
+    /// - Throws: ``InvalidNSIDError``, indicating the Namespace Identifier (NSID) is invalid.
     public static func validate(_ nsid: String) throws {
-        let asciiCheck = CharacterSet.decimalDigits
+        let allowedASCIICharacterSet = CharacterSet.decimalDigits
             .union(.uppercaseLetters)
             .union(.lowercaseLetters)
             .union(CharacterSet(charactersIn: "._-"))
 
-        guard nsid.rangeOfCharacter(from: asciiCheck.inverted) == nil else {
-            throw InvalidHandleError.disallowedCharacter
+        guard nsid.rangeOfCharacter(from: allowedASCIICharacterSet.inverted) == nil else {
+            throw InvalidNSIDError.disallowedCharacter
         }
 
-        let nsidCount = nsid.count
-        guard nsidCount <= 317 else {
+        let nsidCharacterCount = nsid.count
+        guard nsidCharacterCount <= 317 else {
             throw InvalidNSIDError.tooLong(maxCharacters: 317)
         }
 
@@ -41,7 +41,7 @@ public enum NSIDValidator: ValidatorProtocol {
             }
 
             guard nsidComponent.count <= 63 else {
-                throw InvalidNSIDError.nsidPartTooLong(maxCharacters: nsidComponent.count)
+                throw InvalidNSIDError.nsidPartTooLong(maxCharacters: 63)
             }
 
             guard !nsidComponent.hasPrefix("-"), !nsidComponent.hasSuffix("-") else {
@@ -50,8 +50,9 @@ public enum NSIDValidator: ValidatorProtocol {
 
             if index == 0,
                let firstCharacter = nsidComponent.first {
-                let digitCheck = CharacterSet.decimalDigits
-                guard String(firstCharacter).rangeOfCharacter(from: digitCheck.inverted) == nil else {
+                let digitCharacterSet = CharacterSet.decimalDigits
+
+                guard String(firstCharacter).rangeOfCharacter(from: digitCharacterSet) == nil else {
                     throw InvalidNSIDError.nsidPartStartsWithDigit
                 }
 
@@ -62,13 +63,14 @@ public enum NSIDValidator: ValidatorProtocol {
                let firstCharacter = nsidComponent.first {
                 let remainingCharacters = nsidComponent.dropFirst()
 
-                let nameSegmentASCIICheckFirstCharacter = CharacterSet.uppercaseLetters
+                let firstCharacterAllowedSet = CharacterSet.uppercaseLetters
                     .union(.lowercaseLetters)
-                let nameSegmentASCIICheck = nameSegmentASCIICheckFirstCharacter
+
+                let remainingCharactersAllowedSet = firstCharacterAllowedSet
                     .union(.decimalDigits)
 
-                guard String(firstCharacter).rangeOfCharacter(from: nameSegmentASCIICheckFirstCharacter.inverted) == nil,
-                      String(remainingCharacters).rangeOfCharacter(from: nameSegmentASCIICheck.inverted) == nil else {
+                guard String(firstCharacter).rangeOfCharacter(from: firstCharacterAllowedSet.inverted) == nil,
+                      String(remainingCharacters).rangeOfCharacter(from: remainingCharactersAllowedSet.inverted) == nil else {
                     throw InvalidNSIDError.nsidNamePartContainsInvalidCharacter
                 }
             }

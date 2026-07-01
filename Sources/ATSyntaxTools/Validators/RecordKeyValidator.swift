@@ -16,7 +16,7 @@ public enum RecordKeyValidator: ValidatorProtocol {
     ///
     /// - Throws: ``InvalidRecordKeyError`` , indicating the Record Key is invalid.
     public static func validate(_ recordKey: String) throws {
-        guard recordKey.count > 1, recordKey.count <= 512 else {
+        guard recordKey.count >= 1, recordKey.count <= 512 else {
             throw InvalidRecordKeyError.invalidLength
         }
 

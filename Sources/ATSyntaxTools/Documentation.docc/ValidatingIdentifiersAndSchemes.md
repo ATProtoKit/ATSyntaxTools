@@ -8,11 +8,11 @@ Find out the requirements for each identifier within the AT Protocol.
 
 ## Overview
 
-These identifiers and schemes (we'll call them "identifiers" for short) are part of what makes the AT Protocol work. Not only is validation within the scope of best practices with respect to Swift, but it'll help to reduce less potenital bugs and errors.
+These identifiers and schemes are part of what makes the AT Protocol work. Validating them close to their input point helps reduce avoidable protocol errors.
 
 ## Validation
 
-Regardless of the manager struct you're using, you'll be able to find a `validate()` method within them. This is the quickest way to determine whether the identifier is valid. If the method doesn't respond, then it means the identifier is valid. Otherwise, an error would occur.
+Each validator provides a `validate(_:)` method. If the method returns normally, the identifier is valid. If validation fails, the method throws an error that describes the failure category.
 
 ```swift
 do {
@@ -43,12 +43,11 @@ Each identifier has various requirements in order to be valid. A short list for 
 
 ### AT URI
 
-AT URIs have the following structure:
+ATSyntaxTools validates the restricted AT URI form used by current Lexicon `at-uri` fields:
 1. The `at://` prefix.
 2. An authority segment.
-3. A Namespaced Identifier (NSID) segment.
-4. A Record Key segment.
-5. A fragment segment.
+3. An optional Namespaced Identifier (NSID) collection segment.
+4. An optional Record Key segment.
 
 - Note: Only the `at://` prefix and authority segments are required.
 
@@ -56,7 +55,7 @@ This scheme also needs to conform to the following requirements:
 - The total length must not exceed 8 KB.
 - Must contain only ASCII characters; non-ASCII characters should be URL-encoded.
 - Whitespace characters are not allowed.
-- The authority segment should either a valid decentralized identifier (DID) or handle.
+- The authority segment should be either a valid decentralized identifier (DID) or handle.
 - Optionally, the authority segment can be followed by a slash (/) and a valid NSID as the start of the path.
 - Optionally, if an NSID is provided, it can be followed by a slash (/) and a Record Key segment.
 - The Record Key segment follows the [same rules as the `any` Record Key requirements](<doc:###Record-Key>).
@@ -75,12 +74,12 @@ For the W3C:
     - Underscores (\_).
     - Colons (:).
     - Percentage signs (%).
-    - Hypens (-).
+    - Hyphens (-).
 - The first segment must be `did:`. It must all be lowercased.
 - The second segment (the method) should have at least one lowercased letter, followed by a colon (:).
-- The final segment can be of any allowed characters, except for the colon (:).
+- The identifier segment can contain the allowed ASCII characters, but colons (:) cannot be at the end of it.
 - Multiple colons (:) can be included without spaces.
-- The pencentage sign (%) is only used for percent encoding and must be followed up with two hexidecimal characters. It can't end with a percentage sign (%).
+- The percentage sign (%) is used for percent encoding. It is allowed inside the identifier segment, but cannot end with a percentage sign (%).
 - Queries ("?") and fragments ("#") are defined for "DID URIs", but are not part of the identifier itself.
 - The current specification does not impose a maximum length for a DID.
 
@@ -88,7 +87,7 @@ For the W3C:
 
 In addition, the AT Protocol makes the following requirements:
 - `did:plc` and `did:web` are currently the only two types that are valid. This is not enforced at the lexicon layer.
-- A hard limit of 8 KB is put in place.
+- A hard limit of 2,048 characters is put in place.
 
 - Note: ``DIDValidator`` can't validate percent encoding at this time.
 
@@ -150,7 +149,7 @@ Further reading: [NSID Syntax](https://atproto.com/specs/nsid)
 ### Record Key
 
 Record Keys have various types: `tid`, `any`, and `literal:<value>`. All Record Keys need to conform to the following:
-- All characters include letters (both uppercase and lowercase), digits, periods (.), hypens (-), underscores (\_), colons (:), and tildes (~).
+- All characters include letters (both uppercase and lowercase), digits, periods (.), hyphens (-), underscores (\_), colons (:), and tildes (~).
 - Must be at least 1 character and at most 512 characters long.
 - Record Keys can _not_ be _just_ `.` or `..`.
 - Must be a permissible part of a repository MST path string.
@@ -175,7 +174,5 @@ In addition to this, each type has additional requirements.
 **`literal:<value>`**
 
 Record Key type is used when there should be only a single record in the collection, with a fixed, well-known Record Key.
-
-
 
 Further reading: [Record Key Syntax](https://atproto.com/specs/record-key)

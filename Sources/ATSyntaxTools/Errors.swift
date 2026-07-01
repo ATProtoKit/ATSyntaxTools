@@ -72,7 +72,7 @@ public enum InvalidHandleError: Error, LocalizedError, CustomStringConvertible {
     /// Handle domain has less than two parts.
     case handleDomainHasLessThanTwoParts
 
-    /// Handle parts don't contain any characters.
+    /// Handle parts don't contain characters.
     case handlePartsEmpty
 
     /// At least one part of the handle is too long.
@@ -99,7 +99,7 @@ public enum InvalidHandleError: Error, LocalizedError, CustomStringConvertible {
             case .handleDomainHasLessThanTwoParts:
                 return "Handle domain has less than two parts."
             case .handlePartsEmpty:
-                return "Handle parts don't contain any characters."
+                return "Handle parts don't contain characters."
             case .handlePartTooLong:
                 return "At least one part of the handle is too long."
             case .handlePartStartsOrEndsWithHyphen:
@@ -312,6 +312,9 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
     /// AT URI contains the slash character in the collection segment while lacking a Record Key.
     case containsSlashAfterCollectionWithNoRecordKey
 
+    /// The Record Key in the second path segment is invalid.
+    case invalidRecordKeyInSecondPathSegment
+
     /// AT URI contains an invalid number of parts with a trailing slash.
     case invalidNumberOfPartsWithTrailingSlash
 
@@ -326,6 +329,12 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
 
     /// There is at least one invalid character in the fragment segment.
     case disallowedCharactersInFragmentSegment
+
+    /// AT URI contains a query part, which is not allowed in Lexicon AT URI syntax.
+    case queryPartNotAllowed
+
+    /// AT URI contains a fragment part, which is not allowed in Lexicon AT URI syntax.
+    case fragmentPartNotAllowed
 
     /// AT URI couldn't be validated using a regular expression.
     case didntValidateViaRegex
@@ -348,6 +357,8 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
                 return "The NSID in the first path segment of the AT URI is invalid."
             case .containsSlashAfterCollectionWithNoRecordKey:
                 return "AT URI contains a slash `/` after a collection segment while lacking a Record Key."
+            case .invalidRecordKeyInSecondPathSegment:
+                return "The Record Key in the second path segment of the AT URI is invalid."
             case .invalidNumberOfPartsWithTrailingSlash:
                 return "AT URI has an invalid number of parts with a trailing slash."
             case .emptyFragmentPartWithSlashAtTheStart:
@@ -358,6 +369,10 @@ public enum InvalidATURIError: Error, LocalizedError, CustomStringConvertible {
                 return "AT URI has too many path segments and/or a trailing slash."
             case .disallowedCharactersInFragmentSegment:
                 return "Invalid character in the fragment segment of the AT URI."
+            case .queryPartNotAllowed:
+                return "AT URI query parts are not allowed in Lexicon AT URI syntax."
+            case .fragmentPartNotAllowed:
+                return "AT URI fragment parts are not allowed in Lexicon AT URI syntax."
             case .didntValidateViaRegex:
                 return "The string didn't validate via regular expression."
         }

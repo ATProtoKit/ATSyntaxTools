@@ -133,4 +133,12 @@ public struct ATURIValidationTests {
         try ATURIValidator.validate(atURI)
         #expect(ATURIValidator.isValid(atURI))
     }
+
+    @Test("Rejects invalid restricted AT URIs", arguments: TestCases.invalidATURIs)
+    public func rejectsInvalidATURIs(_ atURI: String) {
+        #expect(!ATURIValidator.isValid(atURI))
+        #expect(throws: InvalidATURIError.self) {
+            try ATURIValidator.validate(atURI)
+        }
+    }
 }

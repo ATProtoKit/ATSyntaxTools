@@ -97,4 +97,12 @@ public struct RecordKeyValidationTests {
         try RecordKeyValidator.validate(recordKey)
         #expect(RecordKeyValidator.isValid(recordKey))
     }
+
+    @Test("Rejects invalid Record Keys", arguments: TestCases.invalidRecordKeys)
+    public func rejectsInvalidRecordKeys(_ recordKey: String) {
+        #expect(!RecordKeyValidator.isValid(recordKey))
+        #expect(throws: InvalidRecordKeyError.self) {
+            try RecordKeyValidator.validate(recordKey)
+        }
+    }
 }

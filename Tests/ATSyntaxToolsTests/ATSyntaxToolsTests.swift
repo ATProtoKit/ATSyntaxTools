@@ -62,4 +62,11 @@ public struct DIDValidationTests {
             try DIDValidator.validate(did)
         }
     }
+
+    @Test("Preserves case-sensitive DID during normalization")
+    public func preservesCaseSensitiveDIDs() throws {
+        let did = "did:key:zQ3shZc2QzApp2oymGvQbzP8eKheVshBHbU4ZYjeXqwSKEn6N"
+        let normalizedDID = try DIDValidator.normalize(did)
+        #expect(normalizedDID == did)
+    }
 }

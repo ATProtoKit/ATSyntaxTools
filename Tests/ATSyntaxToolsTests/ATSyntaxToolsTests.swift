@@ -124,3 +124,13 @@ public struct TIDValidationTests {
         }
     }
 }
+
+@Suite("AT URI validation", .tags(.atURIs))
+public struct ATURIValidationTests {
+
+    @Test("Accepts valid restricted AT URIs", arguments: TestCases.validATURIs)
+    public func acceptsValidATURIs(_ atURI: String) throws {
+        try ATURIValidator.validate(atURI)
+        #expect(ATURIValidator.isValid(atURI))
+    }
+}

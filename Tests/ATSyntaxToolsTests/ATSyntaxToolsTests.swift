@@ -106,3 +106,13 @@ public struct RecordKeyValidationTests {
         }
     }
 }
+
+@Suite("TID validation", .tags(.tids))
+public struct TIDValidationTests {
+
+    @Test("Accepts valid TIDs", arguments: TestCases.validTIDs)
+    public func acceptsValidTIDs(_ tid: String) throws {
+        try TIDValidator.validate(tid)
+        #expect(TIDValidator.isValid(tid))
+    }
+}

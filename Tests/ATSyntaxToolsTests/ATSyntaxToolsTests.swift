@@ -45,3 +45,13 @@ public struct HandleValidationTests {
         #expect(HandleValidator.isTLDValid(handle: "alice.exampleapp"))
     }
 }
+
+@Suite("DID validation", .tags(.dids))
+public struct DIDValidationTests {
+
+    @Test("Accepts valid DIDs", arguments: TestCases.validDIDs)
+    public func acceptsValidDIDs(_ did: String) throws {
+        try DIDValidator.validate(did)
+        #expect(DIDValidator.isValid(did))
+    }
+}

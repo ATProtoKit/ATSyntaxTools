@@ -28,8 +28,6 @@ public enum RegexMatch {
                 return nil
             }
 
-            print(match.numberOfRanges)
-
             var results: [String?] = []
             for i in 0..<match.numberOfRanges {
                 let range = match.range(at: i)

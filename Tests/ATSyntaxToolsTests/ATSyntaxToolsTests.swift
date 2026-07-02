@@ -30,4 +30,11 @@ public struct HandleValidationTests {
         let normalizedHandle = try HandleValidator.normalize("JoHn.TeST")
         #expect(normalizedHandle == "john.test")
     }
+
+    @Test("Rejects handles that fail after normalization")
+    public func rejectsInvalidNormalizedHandles() {
+        #expect(throws: InvalidHandleError.self) {
+            try HandleValidator.normalize("JoH!n.TeST")
+        }
+    }
 }

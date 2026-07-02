@@ -24,4 +24,10 @@ public struct HandleValidationTests {
             try HandleValidator.validate(handle)
         }
     }
+
+    @Test("Normalizes handles to lowercase ASCII form")
+    public func normalizesHandles() throws {
+        let normalizedHandle = try HandleValidator.normalize("JoHn.TeST")
+        #expect(normalizedHandle == "john.test")
+    }
 }

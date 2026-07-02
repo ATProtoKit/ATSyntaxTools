@@ -38,7 +38,7 @@ public enum Punycode {
     /// Encodes a full domain name (e.g. `bücher.com` or `🍿.com`) using IDNA rules.
     ///
     /// This function splits the domain into labels, encodes each with Punycode if needed,
-    /// and prepends "xn--" to any encoded label as per IDNA.
+    /// and prepends "xn--" to each encoded label as per IDNA.
     ///
     /// - Parameter domain: A full domain name (may include Unicode).
     /// - Returns: The encoded domain (e.g. "xn--bcher-kva.com")

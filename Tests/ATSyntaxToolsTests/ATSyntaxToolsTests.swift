@@ -37,4 +37,11 @@ public struct HandleValidationTests {
             try HandleValidator.normalize("JoH!n.TeST")
         }
     }
+
+    @Test("Reports disallowed TLDs")
+    public func reportsDisallowedTLDs() {
+        #expect(!HandleValidator.isTLDValid(handle: "laptop.local"))
+        #expect(!HandleValidator.isTLDValid(handle: "name.onion"))
+        #expect(HandleValidator.isTLDValid(handle: "alice.exampleapp"))
+    }
 }

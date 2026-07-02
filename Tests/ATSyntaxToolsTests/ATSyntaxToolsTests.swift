@@ -70,3 +70,21 @@ public struct DIDValidationTests {
         #expect(normalizedDID == did)
     }
 }
+
+@Suite("NSID validation", .tags(.nsids))
+public struct NSIDValidationTests {
+
+    @Test("Accepts valid NSIDs", arguments: TestCases.validNSIDs)
+    public func acceptsValidNSIDs(_ nsid: String) throws {
+        try NSIDValidator.validate(nsid)
+        #expect(NSIDValidator.isValid(nsid))
+    }
+
+    @Test("Rejects invalid NSIDs", arguments: TestCases.invalidNSIDs)
+    public func rejectsInvalidNSIDs(_ nsid: String) {
+        #expect(!NSIDValidator.isValid(nsid))
+        #expect(throws: InvalidNSIDError.self) {
+            try NSIDValidator.validate(nsid)
+        }
+    }
+}

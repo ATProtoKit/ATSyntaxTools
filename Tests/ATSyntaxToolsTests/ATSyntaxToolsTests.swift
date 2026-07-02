@@ -88,3 +88,13 @@ public struct NSIDValidationTests {
         }
     }
 }
+
+@Suite("Record Key validation", .tags(.recordKeys))
+public struct RecordKeyValidationTests {
+
+    @Test("Accepts valid Record Keys", arguments: TestCases.validRecordKeys)
+    public func acceptsValidRecordKeys(_ recordKey: String) throws {
+        try RecordKeyValidator.validate(recordKey)
+        #expect(RecordKeyValidator.isValid(recordKey))
+    }
+}

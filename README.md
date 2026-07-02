@@ -34,12 +34,12 @@ Here are the following identifiers for you to use in this package.
 import ATSyntaxTools
 
 do {
-    let isHandleValid = HandleValidator.isHandleValid("alice.test")
+    let isHandleValid = HandleValidator.isValid("alice.test")
     print(isHandleValid) // returns `true`.
 
     try HandleValidator.validate("alice.test") // Doesn't throw; handle is valid.
 
-    let isHandleValid2 = HandleValidator.isHandleValid("al!ce.test")
+    let isHandleValid2 = HandleValidator.isValid("al!ce.test")
     print(isHandleValid2) // returns `false`.
 
     try HandleValidator.validate("al!ce.test") // Throws InvalidHandleError.

@@ -16,10 +16,7 @@ public enum NSIDValidator: ValidatorProtocol {
     ///
     /// - Throws: ``InvalidNSIDError``, indicating the Namespace Identifier (NSID) is invalid.
     public static func validate(_ nsid: String) throws {
-        let allowedASCIICharacterSet = CharacterSet.decimalDigits
-            .union(.uppercaseLetters)
-            .union(.lowercaseLetters)
-            .union(CharacterSet(charactersIn: "._-"))
+        let allowedASCIICharacterSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-")
 
         guard nsid.rangeOfCharacter(from: allowedASCIICharacterSet.inverted) == nil else {
             throw InvalidNSIDError.disallowedCharacter

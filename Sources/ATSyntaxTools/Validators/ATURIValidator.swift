@@ -16,24 +16,25 @@ public enum ATURIValidator: ValidatorProtocol {
     ///
     /// - Throws: ``InvalidATURIError``, indicating the AT URI is invalid.
     public static func validate(_ atURI: String) throws {
-        let uriParts = atURI.components(separatedBy: "#")
-
-        guard uriParts.count <= 2 else {
-            throw InvalidATURIError.invalidNumberOfPartsWithTrailingSlash
+        guard atURI.count <= 8 * 1024 else {
+            throw InvalidATURIError.tooLong
         }
 
-        let asciiCheck = CharacterSet.lowercaseLetters
-            .union(.uppercaseLetters)
-            .union(.decimalDigits)
-            .union(CharacterSet(charactersIn: "._~:@!$&')(*+,;=%/-"))
+        guard !atURI.contains("#") else {
+            throw InvalidATURIError.fragmentPartNotAllowed
+        }
 
-        guard let fragmentSegment = uriParts.last,
-              let uriPart = uriParts.first,
-              String(uriPart).rangeOfCharacter(from: asciiCheck.inverted) == nil else {
+        guard !atURI.contains("?") else {
+            throw InvalidATURIError.queryPartNotAllowed
+        }
+
+        let asciiCheck = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._~:@!$&')(*+,;=%/-")
+
+        guard atURI.rangeOfCharacter(from: asciiCheck.inverted) == nil else {
             throw InvalidATURIError.disallowedCharacters
         }
 
-        let atURIFragments = String(uriPart).components(separatedBy: "/")
+        let atURIFragments = atURI.components(separatedBy: "/")
         guard atURIFragments.count >= 3 else {
             throw InvalidATURIError.noMethodOrAuthorityParts
         }
@@ -68,36 +69,16 @@ public enum ATURIValidator: ValidatorProtocol {
             guard atURIFragments[4].count > 0 else {
                 throw InvalidATURIError.containsSlashAfterCollectionWithNoRecordKey
             }
+
+            do {
+                try RecordKeyValidator.validate(atURIFragments[4])
+            } catch {
+                throw InvalidATURIError.invalidRecordKeyInSecondPathSegment
+            }
         }
 
         guard atURIFragments.count < 6 else {
             throw InvalidATURIError.tooManyPathSegmentsAndOrHasTrailingSlash
-        }
-
-        if uriParts.count == 2 {
-            guard !fragmentSegment.isEmpty else {
-                throw InvalidATURIError.emptyFragmentPartWithSlashAtTheStart
-            }
-
-            guard fragmentSegment.first == "/" else {
-                throw InvalidATURIError.emptyFragmentPartWithSlashAtTheStart
-            }
-
-            let fragmentCheck = CharacterSet.uppercaseLetters
-                .union(.lowercaseLetters)
-                .union(.decimalDigits)
-                .union(CharacterSet(charactersIn: #"._~:@!$&')(*+,;=%[]/-"#))
-
-            let hasValidFragmentPrefix = fragmentSegment.first == "/"
-            let fragmentHasOnlyAllowedCharacters = fragmentSegment.rangeOfCharacter(from: fragmentCheck.inverted) == nil
-
-            guard hasValidFragmentPrefix && fragmentHasOnlyAllowedCharacters else {
-                throw InvalidATURIError.disallowedCharactersInFragmentSegment
-            }
-        }
-
-        guard atURI.count <= 8 * 1024 else {
-            throw InvalidATURIError.tooLong
         }
     }
 

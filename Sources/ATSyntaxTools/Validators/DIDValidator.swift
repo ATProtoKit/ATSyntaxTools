@@ -41,7 +41,7 @@ public enum DIDValidator: Canonicalizable {
         }
 
         guard did.count <= 2_048 else {
-            throw InvalidDIDError.didContainsUppercaseLetter
+            throw InvalidDIDError.tooLong
         }
     }
 
@@ -65,10 +65,7 @@ public enum DIDValidator: Canonicalizable {
     ///
     /// - Throws: ``InvalidDIDError``, indicating the DID is invalid.
     public static func normalize(_ did: String) throws -> String {
-        let normalizedDID = did.lowercased()
-        let asciiDID = try Punycode.encode(normalizedDID)
-        try DIDValidator.validate(asciiDID)
-
-        return normalizedDID
+        try DIDValidator.validate(did)
+        return did
     }
 }

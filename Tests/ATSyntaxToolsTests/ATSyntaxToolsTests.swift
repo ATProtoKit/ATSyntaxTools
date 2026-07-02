@@ -16,4 +16,12 @@ public struct HandleValidationTests {
         try HandleValidator.validate(handle)
         #expect(HandleValidator.isValid(handle))
     }
+
+    @Test("Rejects invalid handles", arguments: TestCases.invalidHandles)
+    public func rejectsInvalidHandles(_ handle: String) {
+        #expect(!HandleValidator.isValid(handle))
+        #expect(throws: InvalidHandleError.self) {
+            try HandleValidator.validate(handle)
+        }
+    }
 }

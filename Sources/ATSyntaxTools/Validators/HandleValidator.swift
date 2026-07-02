@@ -43,10 +43,7 @@ public enum HandleValidator: Canonicalizable {
             throw InvalidHandleError.handleIsInvalidHandle
         }
 
-        let asciiCheck = CharacterSet.decimalDigits
-                         .union(.uppercaseLetters)
-                         .union(.lowercaseLetters)
-                         .union(CharacterSet(charactersIn: "._-"))
+        let asciiCheck = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-")
 
         guard handle.rangeOfCharacter(from: asciiCheck.inverted) == nil else {
             throw InvalidHandleError.disallowedCharacter
@@ -77,8 +74,7 @@ public enum HandleValidator: Canonicalizable {
 
             if index == handleComponents.count - 1,
                let firstCharacter = handleComponent.first {
-                let tldASCIICheck = CharacterSet.uppercaseLetters
-                    .union(.lowercaseLetters)
+                let tldASCIICheck = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
                 guard String(firstCharacter).rangeOfCharacter(from: tldASCIICheck.inverted) == nil else {
                     throw InvalidHandleError.tldPartBeginsWithNonASCIILetter
@@ -93,7 +89,7 @@ public enum HandleValidator: Canonicalizable {
     /// - Returns: `true` if the handle is valid, or `false` if it isn't.
     public static func isValid(_ handle: String) -> Bool {
         do {
-            try HandleValidator.validate(handle.lowercased())
+            try HandleValidator.validate(handle)
             return true
         } catch {
             return false
@@ -112,7 +108,7 @@ public enum HandleValidator: Canonicalizable {
         }
 
         let tld = ".\(handleComponent)"
-        return HandleValidator.disallowedTLDs.contains(tld)
+        return !HandleValidator.disallowedTLDs.contains(tld)
     }
 
     /// Normalizes the handle.
@@ -123,7 +119,7 @@ public enum HandleValidator: Canonicalizable {
     /// - Throws: ``InvalidHandleError``, indicating the handle is invalid.
     public static func normalize(_ handle: String) throws -> String {
         let normalizedHandle = handle.lowercased()
-        let asciiHandle = try Punycode.encode(normalizedHandle)
+        let asciiHandle = try Punycode.encodeDomain(normalizedHandle)
         try HandleValidator.validate(asciiHandle)
 
         return asciiHandle

@@ -54,4 +54,12 @@ public struct DIDValidationTests {
         try DIDValidator.validate(did)
         #expect(DIDValidator.isValid(did))
     }
+
+    @Test("Rejects invalid DIDs", arguments: TestCases.invalidDIDs)
+    public func rejectsInvalidDIDs(_ did: String) {
+        #expect(!DIDValidator.isValid(did))
+        #expect(throws: InvalidDIDError.self) {
+            try DIDValidator.validate(did)
+        }
+    }
 }

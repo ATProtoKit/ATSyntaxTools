@@ -115,4 +115,12 @@ public struct TIDValidationTests {
         try TIDValidator.validate(tid)
         #expect(TIDValidator.isValid(tid))
     }
+
+    @Test("Rejects invalid TIDs", arguments: TestCases.invalidTIDs)
+    public func rejectsInvalidTIDs(_ tid: String) {
+        #expect(!TIDValidator.isValid(tid))
+        #expect(throws: InvalidTIDError.self) {
+            try TIDValidator.validate(tid)
+        }
+    }
 }
